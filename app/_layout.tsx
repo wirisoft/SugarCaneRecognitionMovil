@@ -1,39 +1,71 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ title: 'Home' }} />
+      <Stack.Screen
+        name="Auth/LoginScreen" // Quitar el "./" del inicio
+        options={{ 
+          title: "Iniciar Sesión",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerBackVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Home/MainScreen" // Quitar el "./" del inicio
+        options={{ 
+          title: "",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="Perfil/PerfilScreen" // Quitar el "./" del inicio
+        options={{ 
+          title: "Mi perfil",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' }
+        }}
+      />
+            <Stack.Screen
+        name="Perfil/PerfilConfig" // Quitar el "./" del inicio
+        options={{ 
+          title: "Mi perfil",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' }
+        }}
+      />
+      <Stack.Screen
+        name="Auth/ScreenLoad" // Quitar el "./" del inicio
+        options={{ 
+          title: "ScreenLoad",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerShown: false,
+          
+        }}
+      />
+      
+    
+            <Stack.Screen
+        name="Auth/Register" // Quitar el "./" del inicio
+        options={{ 
+          title: "Nueva Cuenta",
+          headerStyle: { backgroundColor: '#E8E8E8' },
+          headerTintColor: 'rgba(203, 74, 74, 1)',
+          headerTitleStyle: { fontWeight: 'bold' }
+        }}
+      />
+    </Stack>
+
+    
   );
 }
